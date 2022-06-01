@@ -1,18 +1,22 @@
-import React from "react";  
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-
-
-export const Navbar: React.FC = () => (
-    <nav>
-      
-        <div className="nav-wrapper purple darken-3 px1">
-    <a href="/" className="brand-logo">HUEGRAM</a>
-    <ul id="nav-mobile" className="right hide-on-med-and-down">
-      <li><a href="/">Strona</a></li>
-      <li><a href="/">Info</a></li>
-      
-    </ul>
-  </div>
-
-    </nav>
+//funkcja musi zwracać jsx
+//Функция не принимает значений, функция ничего не возвращает(как void)
+export const Navbar: React.FunctionComponent = () => (
+  <nav>
+    <div className="nav-wrapper purple darken-4 px1">
+      <a href="/" className="brand-logo">
+        AMgram
+      </a>
+      <ul className="right hide-on-med-and-down">
+        <li>
+          <NavLink to="/">List Zadań</NavLink>
+        </li>
+        <li>
+          <NavLink to="/about">Info</NavLink>
+        </li>
+      </ul>
+    </div>
+  </nav>
 )

@@ -1,53 +1,23 @@
-import React, { useState } from 'react';
-import { Navbar } from './Components/Navbar';
-import { TodoForm } from './Components/form';
-import { TodoList } from './Components/TodoList';
-import { ITodo } from './interfaces';
+import React from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { Navbar } from './components/Navbar'
+import { TodosPage } from './pages/TodosPage'
+import { AboutPage } from './pages/AboutPage'
 
+//funkcja musi zwracać jsx
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<ITodo[]>([])
-
-  const addHandler = (title: string) => {
-    const newTodo: ITodo = {
-      title: title,
-      Id: Date.now(),
-      completed: false
-    }
-
-    // setTodos([newTodo, ...todos])
-    setTodos(prev => [newTodo, ...todos])
-  }
-
-  const toggleHandler = (id: number) => {
-    setTodos(prev => 
-      prev.map(todo => {
-        if (todo.Id === id){
-          todo.completed = !todo.completed
-        }
-        return todo
-      })
-    )
-  }
-
-  const removeHandler = (id: number) => {
-    setTodos(prev => prev.filter(todo => todo.Id !== id))
-  }
-
-  return ( 
-  <>
-  
-  <Navbar />
-  <div className="container">
-    <TodoForm onAdd={addHandler} />
-
-    <TodoList 
-      todos={todos}
-      onToggle={toggleHandler}
-      onRemove={removeHandler}
-    />
-  </div>
-  </>
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <div className="container">
+        <Switch>
+          {/*Ссылки для страниц инфо и список дел*/}
+          <Route component={TodosPage} path="/" exact />
+          <Route component={AboutPage} path="/about" />
+        </Switch>
+      </div>
+    </BrowserRouter>
   )
 }
 
-export default App;
+export default App
